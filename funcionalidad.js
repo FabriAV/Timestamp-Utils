@@ -41,12 +41,14 @@ document.querySelector('#selected_day').addEventListener('input', () => {
 document.querySelector('#time_stamp').addEventListener('input', () => {
     setFecha(parseInt(input_time.value));
     zonas_seleccionadas.add(local_zone);
-    generar_tabla();    
+    generar_tabla();
 })
 
 document.querySelector('#btn_agregar').addEventListener('click', () => {
-    zonas_seleccionadas.add(select.value);
-    generar_tabla();
+    if (!isNaN(parseInt(input_time.value)) || date_elegida.input_time !== '') {
+        zonas_seleccionadas.add(select.value);
+        generar_tabla();
+    }
 })
 
 document.querySelectorAll('.btn-set-date').forEach(boton => {
@@ -56,7 +58,7 @@ document.querySelectorAll('.btn-set-date').forEach(boton => {
         fecha_hoy.setDate(fecha_hoy.getDate() + diferencia);
         setFecha(fecha_hoy);
         zonas_seleccionadas.add(local_zone);
-        generar_tabla();  
+        generar_tabla();
     })
 })
 
@@ -64,7 +66,7 @@ function setFecha(fecha) {
     let fecha_elegida = new Date(fecha);
     let date = fecha_elegida.toISOString().slice(0, 10);
     let time = fecha_elegida.toTimeString().slice(0, 5);
-    date_elegida.value = date + " " + time; 
+    date_elegida.value = date + " " + time;
     input_time.value = fecha_elegida.getTime()
 }
 
