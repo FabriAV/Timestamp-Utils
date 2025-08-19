@@ -45,7 +45,7 @@ document.querySelector('#time_stamp').addEventListener('input', () => {
 })
 
 document.querySelector('#btn_agregar').addEventListener('click', () => {
-    if (!isNaN(parseInt(input_time.value)) || date_elegida.input_time !== '') {
+    if (date_elegida.value !== ''  && select.value !== select[0].value) {
         zonas_seleccionadas.add(select.value);
         generar_tabla();
     }
