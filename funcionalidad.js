@@ -4,7 +4,7 @@ const TimeZones = Intl.supportedValuesOf('timeZone');
 const tbody = document.querySelector('#informacion');
 const select = document.querySelector('#zonas');
 const local_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-const zonas_seleccionadas = new Set();
+const zonas_seleccionadas = new Set(JSON.parse(localStorage.getItem("selectedTimezones") || "[]"));
 
 for (const zone of TimeZones) {
     let opcion = document.createElement("option");
@@ -20,14 +20,15 @@ function generar_tabla() {
         let columnalocatedate = document.createElement("td");
         let btn_remover = document.createElement("button");
         columnaTimezone.innerText = zona;
-        columnaTimezone.className = 'zonas-horarias'
         columnalocatedate.innerText = new Date(date_elegida.value).toLocaleString("es-MX", { timeZone: zona });
         btn_remover.textContent = "Delete"
         fila.append(columnaTimezone, columnalocatedate, btn_remover);
         tbody.append(fila);
 
         btn_remover.addEventListener('click', (event) => {
-            event.target.parentNode.remove()
+            event.target.parentNode.remove();
+            zonas_seleccionadas.delete(zona);
+            localStorage.setItem("selectedTimezones", JSON.stringify([...zonas_seleccionadas]));
         })
     }
 }
@@ -35,18 +36,21 @@ function generar_tabla() {
 document.querySelector('#selected_day').addEventListener('input', () => {
     input_time.value = new Date(date_elegida.value).getTime();
     zonas_seleccionadas.add(local_zone);
+    localStorage.setItem("selectedTimezones", JSON.stringify([...zonas_seleccionadas]));
     generar_tabla();
 })
-
+    
 document.querySelector('#time_stamp').addEventListener('input', () => {
     setFecha(parseInt(input_time.value));
     zonas_seleccionadas.add(local_zone);
+    localStorage.setItem("selectedTimezones", JSON.stringify([...zonas_seleccionadas]));
     generar_tabla();
 })
 
 document.querySelector('#btn_agregar').addEventListener('click', () => {
-    if (date_elegida.value !== ''  && select.value !== select[0].value) {
+    if (date_elegida.value !== '' && select.value !== select[0].value) {
         zonas_seleccionadas.add(select.value);
+        localStorage.setItem("selectedTimezones", JSON.stringify([...zonas_seleccionadas]));
         generar_tabla();
     }
 })
@@ -58,6 +62,7 @@ document.querySelectorAll('.btn-set-date').forEach(boton => {
         fecha_hoy.setDate(fecha_hoy.getDate() + diferencia);
         setFecha(fecha_hoy);
         zonas_seleccionadas.add(local_zone);
+        localStorage.setItem("selectedTimezones", JSON.stringify([...zonas_seleccionadas]));
         generar_tabla();
     })
 })
