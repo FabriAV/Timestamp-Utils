@@ -1,0 +1,16 @@
+{
+  "name": "Timestamp Utils",
+  "description": "datetime to timestamp converter",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "./resources/icon.png"
+  },
+  "permissions": [
+    "sidePanel"
+  ],
+  "side_panel": {
+    "default_path": "index.html"
+  }
+}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="tailwind_v1.js"></script>
     <title>TimeStamp Utils</title>
 </head>
 
@@ -25,50 +25,71 @@
                     days</button>
             </div>
         </div>
-        <article class="md:flex flex-wrap gap-10 h-fit text-white mb-3">
-            <div class="flex gap-3 md:mb-0 mb-2">
-                <p class="text-white/80 font-light md:text-sm text-[0.82rem] content-end">Date</p>
-                <input class="border-b-1 border-white/80 dark:scheme-dark md:text-base text-[0.9rem]" id="selected_day" type="datetime-local"
-                    ondblclick="(this.type='text')" onfocusout="(this.type='datetime-local')"
-                    placeholder="2025-08-17T02:14">
+        <article class="md:flex flex-col flex-wrap gap-10 h-fit text-white mb-3">
+            <div class="md:flex flex-wrap gap-9 md:mb-0 mb-2 ">
+                <div class="flex gap-3 md:mb-0 mb-2">
+                    <p class="text-white/80 font-light md:text-sm text-[0.82rem] content-end">Date</p>
+                    <input class="border-b-1 border-white/80 dark:scheme-dark md:text-base text-[0.9rem]"
+                        id="selected_day" type="datetime-local" ondblclick="(this.type='text')"
+                        onfocusout="(this.type='datetime-local')" placeholder="2025-08-17T02:14">
+                </div>
+                <div class="flex gap-3">
+                    <p class="text-white/80 font-light md:text-sm text-[0.82rem] content-end">Timestamp</p>
+                    <div class="relative">
+                        <input class="border-b-1 border-white/80 md:text-base text-[0.9rem]" type="text"
+                            id="time_stamp">
+                        <button class="absolute -end-0.5 top-1/2 -translate-y-1/2 hover:bg-gray-800 rounded-lg p-0.5"
+                            id="copy_timestamp">
+                            <svg class="md:w-5 md:h-5 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 8v3a1 1 0 0 1-1 1H5m11 4h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v1m4 3v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-7.13a1 1 0 0 1 .24-.65L7.7 8.35A1 1 0 0 1 8.46 8H13a1 1 0 0 1 1 1Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="flex gap-3">
-                <p class="text-white/80 font-light md:text-sm text-[0.82rem] content-end">Timestamp</p>
-                <input class="border-b-1 border-white/80 md:text-base text-[0.9rem]" type="text" id="time_stamp">
+            <div class="flex gap-3 md:mb-0 mb-2 justify-center">
+                <p class="text-white/80 font-light md:text-sm text-[0.82rem] content-end">ISO Date</p>
+                <input class="border-b-1 border-white/80 dark:scheme-dark md:text-base text-[0.9rem] w-50"
+                    id="selected_ISO" type="text" placeholder="">
             </div>
         </article>
     </section>
-    <section class="text-white px-9 py-7 border-1 w-fit border-white/15 rounded-3xl shadow-md shadow-white/20 mb-5">
-        <div class="flex mb-6">
-            <div class="flex items-center gap-2 w-1/2">
-                <svg class="md:w-5 md:h-5 w-4 h-4 p-0.5 text-white bg-white/15 rounded-sm" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M5 9a7 7 0 1 1 8 6.93V21a1 1 0 1 1-2 0v-5.07A7.001 7.001 0 0 1 5 9Zm5.94-1.06A1.5 1.5 0 0 1 12 7.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.398.158-.78.44-1.06Z"
-                        clip-rule="evenodd" />
-                </svg>
-                <h2 class="md:text-base text-[0.85rem]">Time Zones</h2>
+    <section class="text-white px-9 py-4 w-fit mb-5">
+        <div class="border-1 border-white/25 rounded-3xl shadow-md shadow-white/20 p-9">
+            <div class="flex mb-6 ">
+                <div class="flex items-center gap-2 w-1/2 ">
+                    <svg class="md:w-5 md:h-5 w-4 h-4 p-0.5 text-white bg-white/15 rounded-sm hidden sm:block" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M5 9a7 7 0 1 1 8 6.93V21a1 1 0 1 1-2 0v-5.07A7.001 7.001 0 0 1 5 9Zm5.94-1.06A1.5 1.5 0 0 1 12 7.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.398.158-.78.44-1.06Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h2 class="md:text-base text-[0.85rem] hidden sm:block">Time Zones</h2>
+                </div>
+                <div class="flex md:gap-4 gap-2 w-1/2 justify-end">
+                    <select id="zonas"
+                        class="bg-gray-800 text-white border-1 border-white/20 rounded-md md:w-40 w-35 md:text-[0.84rem] text-xs font-light">
+                        <option id="placeholder" disabled selected hidden>Choose a Time-zone</option>
+                    </select>
+                    <button id="btn_agregar"
+                        class="bg-gray-800 p-1 md:w-20 w-15 rounded-md transition-all duration-300 hover:scale-110 hover:bg-white hover:text-gray-800 md:text-[0.84rem] text-xs">Add</button>
+                </div>
             </div>
-            <div class="flex gap-4 w-1/2 justify-end">
-                <select id="zonas"
-                    class="bg-gray-800 text-white border-1 border-white/20 rounded-md md:w-40 w-35 md:text-[0.84rem] text-xs font-light">
-                    <option id="placeholder" disabled selected hidden>Choose a Time-zone</option>
-                </select>
-                <button id="btn_agregar"
-                    class="bg-gray-800 p-1 md:w-20 w-15 rounded-md transition-all duration-300 hover:scale-110 hover:bg-white hover:text-teal-800 md:text-[0.84rem] text-xs">Add</button>
-            </div>
-        </div>
-        <div class="flex flex-col ">
-            <table class="mb-50 ">
-                <tr class="border-b-1 border-white/40">
-                    <th class="md:pr-50 pr-25 py-3 font-extralight md:text-xs text-[0.7rem]">TIME ZONE</th>
-                    <th class="md:pr-50 pr-25 py-3 font-extralight md:text-xs text-[0.7rem]">LOCATED DATE</th>
-                    <th class="py-3 font-extralight md:text-xs text-[0.7rem]">REMOVE</th>
-                </tr>
-                <tbody id="informacion" class="md:text-[0.78rem] text-sm">
-                </tbody>
-            </table>
+            <div class="flex flex-col ">
+                <table class="mb-50"">
+                    <tr class="border-b-1 border-white/40">
+                        <th class="md:pr-70 pr-40 py-3 font-extralight md:text-xs text-[0.7rem] text-start">TIME ZONE</th>
+                        <th class="py-3 font-extralight md:text-xs text-[0.7rem]">REMOVE</th>
+                    </tr>
+                    <tbody id="informacion" class="md:text-[0.78rem] text-sm">
+                    </tbody>
+                </table>
 
+            </div>
         </div>
     </section>
     <script src="funcionalidad.js"></script>
